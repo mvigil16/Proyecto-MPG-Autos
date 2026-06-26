@@ -5,13 +5,13 @@ Auto MPG Dataset · UCI Machine Learning Repository · 398 observaciones
 
 ## Equipo
 
-| Integrante | Notebook |
-|---|---|
-| Alan A. Castañeda Ramos | 04 — AdaBoost & XGBoost |
-| Daniel Macias Soto | 03 — Random Forest |
-| Guillermo A. Martinez Vanegas | 02 — Modelos Lineales |
-| Mariana Vigil Villegas | 05 — MLP + Comparativa Final |
-| Ronaldo Berrocal Reyes | 01 — EDA & Preprocesamiento |
+| Integrante |
+|---|
+| Alan A. Castañeda Ramos |
+| Daniel Macias Soto |
+| Guillermo A. Martinez Vanegas | 
+| Mariana Vigil Villegas | 
+| Ronaldo Berrocal Reyes | 
 
 ---
 

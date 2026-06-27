@@ -5,11 +5,11 @@ Auto MPG Dataset · UCI Machine Learning Repository · 398 observaciones
 
 ## Equipo
 
-| Integrante |
+| Integrante | 
 |---|
-| Alan A. Castañeda Ramos |
-| Daniel Macias Soto |
-| Guillermo A. Martinez Vanegas | 
+| Alan A. Castañeda Ramos |  
+| Daniel Macias Soto | 
+| Guillermo A. Martinez Vanegas |
 | Mariana Vigil Villegas | 
 | Ronaldo Berrocal Reyes | 
 
@@ -19,27 +19,28 @@ Auto MPG Dataset · UCI Machine Learning Repository · 398 observaciones
 
 | # | Modelo | MAE ↓ | RMSE | R² ↑ |
 |---|---|---|---|---|
-| 1 | **RF Optimizado** | **1.5547** | **2.1306** | **0.9156** |
-| 2 | RF Baseline | 1.5964 | 2.1674 | 0.9126 |
-| 3 | AdaBoost GS | 1.6681 | 2.2467 | 0.9061 |
-| 4 | AdaBoost | 1.7400 | 2.4324 | 0.8900 |
-| 5 | XGBoost GS | 1.7433 | 2.3211 | 0.8998 |
-| 6 | XGBoost | 1.7853 | 2.2911 | 0.9024 |
+| 1 | **RF Optimizado** | **1.5525** | **2.1287** | **0.9157** |
+| 2 | RF Baseline | 1.5913 | 2.1618 | 0.9131 |
+| 3 | AdaBoost GS | 1.6574 | 2.2583 | 0.9051 |
+| 4 | AdaBoost | 1.7213 | 2.4218 | 0.8909 |
+| 5 | XGBoost | 1.7551 | 2.2973 | 0.9018 |
+| 6 | XGBoost GS | 1.7754 | 2.3529 | 0.8970 |
 | 7 | MLP | 1.9427 | 2.4478 | 0.8886 |
-| 8 | OLS (baseline) | 2.2882 | 2.8877 | 0.8449 |
-| 9 | Ridge (L2) | 2.2895 | 2.8914 | 0.8445 |
-| 10 | Lasso (L1) | 2.2935 | 2.9085 | 0.8427 |
-| 11 | Elastic Net | 2.2961 | 2.9037 | 0.8432 |
+| 8 | Árbol Decisión | 2.2842 | 3.3034 | 0.7970 |
+| 9 | OLS (baseline) | 2.2882 | 2.8877 | 0.8449 |
+| 10 | Ridge (L2) | 2.2895 | 2.8914 | 0.8445 |
+| 11 | Lasso (L1) | 2.2935 | 2.9085 | 0.8427 |
+| 12 | Elastic Net | 2.2961 | 2.9037 | 0.8432 |
 
 **Split:** 80/20 · `random_state=42` · **Métrica principal:** MAE  
-**Mejora sobre baseline OLS:** 32% menos error (2.2882 → 1.5547 mpg)
+**Mejora sobre baseline OLS:** 32% menos error (2.2882 → 1.5525 mpg)
 
 ---
 
 ## Estructura del repositorio
 
 ```
-proyecto-auto-mpg/
+Proyecto-MPG-Autos/
 ├── data/
 │   ├── auto_mpg_clean.csv       # Dataset limpio (398 autos, sin nulos)
 │   ├── train_raw.csv            # 318 autos — entrenamiento sin escalar
@@ -48,16 +49,14 @@ proyecto-auto-mpg/
 │   ├── test_scaled.csv          # Prueba escalada
 │   ├── scaler.pkl               # Scaler ajustado SOLO en train
 │   ├── metricas_rf.csv          # Métricas RF Baseline y Optimizado
-│   └── metricas_boosting.csv    # Métricas AdaBoost y XGBoost (base + GS)
+│   └── metricas_boosting.csv    # Métricas AdaBoost y XGBoost
 ├── notebooks/
-│   ├── 01_EDA_Preprocesamiento.ipynb      # Exploración y limpieza
-│   ├── 02_Modelos_Lineales.ipynb          # OLS, Ridge, Lasso, Elastic Net
-│   ├── 03_Random_Forest.ipynb             # RF Baseline y Optimizado
-│   ├── 04_AdaBoost_XGBoost.ipynb          # AdaBoost y XGBoost + GridSearch
-│   └── 05_MLP_Comparativa_Final.ipynb     # MLP + tabla comparativa final
-├── reportes/
-│   └── reporte_proyecto.pdf               # Informe técnico (8-12 páginas)
-├── figures/                               # Gráficas generadas por los NB
+│   ├── EDA_preprocesamiento.ipynb       # Exploración y limpieza
+│   ├── Análisis_Lineal_MPG.ipynb        # OLS, Ridge, Lasso, Elastic Net
+│   ├── RandomForest.ipynb               # Árbol de decisión + RF
+│   ├── XGBoost_AdaBoost.ipynb           # AdaBoost y XGBoost + GridSearch
+│   └── MLP_Comparativa.ipynb            # MLP + tabla comparativa final
+├── figures/                             # Gráficas generadas
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -71,8 +70,8 @@ proyecto-auto-mpg/
 pip install -r requirements.txt
 ```
 
-Ejecutar los notebooks **en orden numérico** (01 → 05).  
-El NB01 genera los archivos en `/data/` que usan todos los demás.  
+Ejecutar los notebooks en orden (EDA → Lineal → RF → XGB/ADA → MLP).  
+El notebook de EDA genera los archivos en `/data/` que usan todos los demás.  
 Todos los notebooks usan `random_state=42` y el mismo split 80/20.
 
 ---
@@ -99,6 +98,7 @@ Todos los notebooks usan `random_state=42` y el mismo split 80/20.
 ## Modelos implementados
 
 - **Lineales:** OLS · Ridge (L2) · Lasso (L1) · Elastic Net
+- **Árboles:** Árbol de Decisión simple (baseline previo a RF)
 - **Ensambles:** Random Forest (baseline + GridSearch) · AdaBoost (base + GS) · XGBoost (base + GS)
 - **Red neuronal:** MLP — arquitectura 8→64→32→16→1, ReLU, Adam, early stopping
 
@@ -106,3 +106,4 @@ Todos los notebooks usan `random_state=42` y el mismo split 80/20.
 
 Quinlan, R. (1993). Auto MPG Dataset. UCI Machine Learning Repository.  
 https://archive.ics.uci.edu/dataset/9/auto+mpg
+
